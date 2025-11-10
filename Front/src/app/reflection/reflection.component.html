@@ -1,0 +1,36 @@
+<section class="container my-5">
+  <header class="mb-4">
+    <h2 class="h3 mb-1">Explorador de Importers</h2>
+    <p class="text-muted mb-0">Ingresaste a esta vista {{ totalVisits }} veces.</p>
+  </header>
+
+  <div class="mb-3">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="loadImporters()"
+      [disabled]="isLoading"
+    >
+      {{ isLoading ? 'Buscando importers' : 'Buscar importers disponibles' }}
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="alert alert-info">
+    Consultando el backend&hellip;
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="showEmptyState" class="alert alert-warning">
+    No se encontraron DLL que implementen <code>ImporterInterface</code>.
+  </div>
+
+  <ul *ngIf="importers.length > 0" class="list-group">
+    <li *ngFor="let importer of importers" class="list-group-item d-flex align-items-center">
+      <span class="badge text-bg-secondary me-3">DLL</span>
+      <span>{{ importer }}</span>
+    </li>
+  </ul>
+</section>
